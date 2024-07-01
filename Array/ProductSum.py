@@ -1,4 +1,7 @@
 """
+Author : Michael Shepherd M
+Date   : 01 Jul 2024
+
 Calculate the Product Sum from a Special Array.
 Python doctests can be run with the following commands:
 python -m doctest -v ProductSum.py
