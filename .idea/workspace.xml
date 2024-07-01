@@ -36,9 +36,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python tests.Doctests in ProductSum.executor": "Run",
     "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main"
+    "git-widget-placeholder": "mikedev__array__productsum"
   }
 }]]></component>
   <component name="RunManager">

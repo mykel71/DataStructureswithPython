@@ -1,6 +1,6 @@
 """
 Calculate the Product Sum from a Special Array.
-Pyhton doctests can be run with the following commands:
+Python doctests can be run with the following commands:
 python -m doctest -v ProductSum.py
 
 Calculate the product sum of a "special" array which can contain integers or nested arrays.
@@ -13,5 +13,75 @@ the product sum is x + 2 * (y + 3z).
 Example input:
 [5, 2, [-7, 1], 3, [6, [-13, 8], 4]]
 Output: 12
-
 """
+
+from typing import Union, List
+
+def ProductSum(arr: List[Union[int, list]], depth: int) -> int:
+    """
+    Recursively calculates the product sum of an array.
+
+    The product sum of an array is defined as the sum of its elements multiplied by their respective depths.
+    If an element is a list, its product sum is calculated recursively by multiplying the sum of its elements
+    with its depths plus one.
+
+    Args:
+        arr: The array of integers and nested lists.
+        depth: The current depth level.
+
+    Returns:
+        int: The product sum of the array.
+
+    Examples:
+        >>> ProductSum([1, 2, 3], 1)
+        6
+        >>> ProductSum([-1, 2, [-3, 4]], 2)
+        8
+        >>> ProductSum([1, 2, 3], -1)
+        -6
+        >>> ProductSum([1, 2, 3], 0)
+        0
+        >>> ProductSum([1, 2, 3], 7)
+        42
+        >>> ProductSum([1, -1], 1)
+        0
+        >>> ProductSum([1, -2], 1)
+        -1
+        >>> ProductSum([-3.5, [1, [0.5]]], 1)
+        1.5
+    """
+
+    total_sum = 0
+    for ele in arr:
+        total_sum += ProductSum(ele, depth + 1) if isinstance(ele, list) else ele
+    return total_sum * depth
+
+def ProductSumArray(array: List[Union[int, list]]) -> int:
+    """
+    Calculate the product sum of an array.
+
+    Args:
+        array (List[Union[int, List]]): The array of integers and nested lists.
+
+    Returns:
+        int: The product sum of the array.
+
+    Examples:
+        >>> ProductSumArray([1, 2, 3])
+        6
+        >>> ProductSumArray([1, [2, 3]])
+        11
+        >>> ProductSumArray([1, [2, [3, 4]]])
+        47
+        >>> ProductSumArray([0])
+        0
+        >>> ProductSumArray([-3.5, [1, [0.5]]])
+        1.5
+        >>> ProductSumArray([1, -2])
+        -1
+    """
+    return ProductSum(array, 1)
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
