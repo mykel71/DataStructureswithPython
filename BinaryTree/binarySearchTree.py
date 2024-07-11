@@ -63,3 +63,46 @@
 from collections.abc import Iterable
 from typing import Any
 
+class Node:
+    def __init__(self, value: int | None = None):
+        self.value = value
+        self.parent: Node | None = None # added in order to delete a node easier
+        self.left: Node | None = None
+        self.right: Node | None = None
+        
+    def __repr__(self) -> str:
+        from pprint import pformat
+        
+        if self.left is None and self.right is None:
+            return str(self.value)
+        return pformat({f"{self.value}": (self.left, self.right)}, indent=1)
+    
+    @property
+    def is_right(self) -> bool:
+        return self.parent is not None and self is self.parent.right
+    
+
+class BinarySearchTree:
+    def __init__(self, root: Node | None = None):
+        self.root = root
+        
+    def __str__(self) -> str:
+        # Return a string of all the Nodes using in order traversal
+        return str(self.root)
+        
+    def __reassgn_nodes(self, node: Node, new_children: Node | Node) -> None:
+        if new_children is not None: # reset its kids
+            new_children.parent = node.parent
+        if node.parent is not None: #reset its parent
+            if node.is_right: # if it is the right child
+                node.parent.right = new_children
+            else:
+                node.parent.left = new_children
+        else:
+            self.root = new_children
+        
+    def empty(self) -> bool:
+        return self.root is None
+    
+    
+            
